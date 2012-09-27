@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Social</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+ 
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<header>
+	<div class="wrapper">
+		<nav>
+			<ul>
+				<li><a href="/users">Users</a></li>
+
+			</ul>
+		</nav>
+		<h1 id="site-title">TheSocialTwit</h1>
+	</div>
+</header>
+
+<div class="wrapper">
+	<%= yield %>
+</div>
+
+<script type="text/javascript" src="//use.typekit.net/tyg0tfk.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+ <%= javascript_include_tag "application" %>
+</body>
+</html>

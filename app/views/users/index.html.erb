@@ -1,0 +1,18 @@
+<section id="users">
+
+	<h1> All Users </h1>
+
+	<ul>
+		<%
+			
+			@all_users.each do |m|
+				%>
+					<h1><%= m.name %></h1>
+				<%
+			end
+
+
+		%>
+	</ul>
+
+</section>
