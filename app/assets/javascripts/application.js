@@ -13,3 +13,40 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+var scene,rendrer,camera;
+
+scene = new THREE.Scene();
+
+if(Modernizr.canvas){
+	if(Modernizr.webgl){
+		//renderer = new THREE.WebGLRenderer();
+		renderer = new THREE.CanvasRenderer();
+	}else{
+		renderer = new THREE.CanvasRenderer();
+	}
+}
+
+
+camera = new THREE.PerspectiveCamera(75,window.innerWidth,window.innerHeight,10000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,7 +3,9 @@ body{
 	font-family: "futura-pt";
 }
 
-
+nav ul li a{
+	font-family: "proxima-nova";
+}
 h1{
 	font-family: "proxima-nova";
 	font-weight: 800;

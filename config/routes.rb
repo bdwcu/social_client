@@ -1,6 +1,18 @@
 Social::Application.routes.draw do
   root :to => "home#index"
 
+  #twitter related pages
+  match "twitter/auth" => 'twitter#auth'
+  match "twitter/check" => 'twitter#checkTwitter'
+  match "twitter/verified" => 'twitter#loggedin'
+
+  #instagram related paths
+  match "instagram/auth" => "instagram#auth"
+  match "instagram/check" => "instagram#check"
+  match "instagram/verified" => "instagram#verified"
+
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

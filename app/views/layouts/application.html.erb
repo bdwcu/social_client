@@ -9,19 +9,27 @@
 <body>
 
 <header>
-	<div class="wrapper">
-		<nav>
-			<ul>
-				<li><a href="/users">Users</a></li>
+	<nav>
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><span class="nav-seperator">/</span></li>
+			<li><a href="/twitter">Twitter</a></li>
+			<li><span class="nav-seperator">/</span></li>
+			<li><a href="/facebook">Facebook</a></li>
+			<li><span class="nav-seperator">/</span></li>
+			<li><a href="/instagram">Instagram</a></li>
+		</ul>
+	</nav>
+	<h1 id="site-title">TheSocialTwit</h1>
 
-			</ul>
-		</nav>
-		<h1 id="site-title">TheSocialTwit</h1>
-	</div>
+	
 </header>
 
-<div class="wrapper">
-	<%= yield %>
+<div id="main">
+	<div class="wrapper">
+		<%= yield %>
+
+	</div>
 </div>
 
 <script type="text/javascript" src="//use.typekit.net/tyg0tfk.js"></script>

@@ -20,11 +20,22 @@
 	max-width: 1024px;
 	margin-left: auto;
 	margin-right: auto;
+
+}
+
+#main{
+	
+
+	background: #fff;
 }
 
 a{
 	text-decoration: none;
 	color:#333;
+}
+
+a:hover{
+	color:red;
 }
 
 /**============================
@@ -33,7 +44,8 @@ a{
 header{
 	height:40px;
 	padding:20px;
-
+	box-shadow: 0px 0px 8px #d1d1d1;
+	background:#fff;
 	margin-bottom: 30px;
 }
 
@@ -46,11 +58,13 @@ header .wrapper{
 nav{
 	float:right;
 	position: relative;
-	top:15px;
+	top:10px;
 }
 
 nav ul li{
 	list-style: none;
+	float:left;
+	margin-left: 20px;
 }
 
 nav ul li a{
@@ -61,3 +75,4 @@ nav ul li a{
 nav ul li a:hover{
 	color:red;
 }
+
