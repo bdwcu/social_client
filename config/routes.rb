@@ -2,9 +2,10 @@ Social::Application.routes.draw do
   root :to => "home#index"
 
   #twitter related pages
-  match "twitter/auth" => 'twitter#auth'
-  match "twitter/check" => 'twitter#checkTwitter'
-  match "twitter/verified" => 'twitter#loggedin'
+  match "twitter/" => "twitter#index"
+
+  #twitter auth urls
+  match "/auth/twitter/callback" => "twitter#init"
 
   #instagram related paths
   match "instagram/auth" => "instagram#auth"

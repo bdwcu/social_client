@@ -12,6 +12,12 @@ gem 'json'
 gem 'twitter'
 gem 'instagram'
 
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+
+gem 'devise'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

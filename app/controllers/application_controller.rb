@@ -2,13 +2,26 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  #configure Twitter client
-  #note - might have to change redirect urls
+
+    #Twitter consumer key and secret
+  twitter_key = "6xoFQDY4F2BBZ2ivDmd17Q"
+  twitter_secret = "lINK86KMTB4Fzq2B6QqMr4MZs88mTQiFKcEIxj0UNmE"
+ 
+  #configure twitter client
+  #configure twitter client
   Twitter.configure do |config|
-  	config.consumer_key = "sMHWTKi986MxQwZDflvRA"
-  	config.consumer_secret = "tO0ua36xeh3ouNrD84WoG3VfJKdXhjjockoUULJV0"
-  	config.oauth_token = "19368648-5WcH2zHleZkzERa1xwI0rGq0Ro2kiij3ZaCcUAZmc"
-  	config.oauth_token_secret = "yYPpaIMvR8H9zO4ozOrp5EuzCfHRAPCGlSQkYaXGMY"
+    config.consumer_key = "6xoFQDY4F2BBZ2ivDmd17Q"
+    config.consumer_secret = "lINK86KMTB4Fzq2B6QqMr4MZs88mTQiFKcEIxj0UNmE"
+    #config.oauth_token = "19368648-D0mY1H1CCYa8Axxv6K1oRtHnKKYFGVxGEpRumZzE0"
+    #config.oauth_token_secret = "ESBjPTIj5GxVRkZvsIOPoExP2aGeSZbue6ekzgcDA"
+  end
+
+  
+
+  #OmniAuth
+  Rails.application.config.middleware.use OmniAuth::Builder do
+    provider :developer unless Rails.env.production?
+    provider :twitter, twitter_key,twitter_secret
   end
 
   #configure Instagram
