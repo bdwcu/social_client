@@ -1,0 +1,12 @@
+<% provide(:title, 'Mentions') %>
+
+<ul>
+	<% @mentions[0..9].each do |mentions| %>
+		<li><img src="<%= mentions.user.profile_image_url %>" /> 
+			<p><%= mentions.user.name %> (<%= "@"+mentions.user.screen_name %>)</p>
+			<p><%= mentions.text %> </p>
+		</li>
+	<% end %>
+
+	
+</ul>

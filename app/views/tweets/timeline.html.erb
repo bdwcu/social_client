@@ -1,0 +1,10 @@
+<% provide(:title, 'Neat Tweet') %>
+
+<ul>
+	<% @timeline[0..9].each do |timeline| %>
+		<li><img src="<%= timeline.user.profile_image_url %>" /> 
+			<p><%= timeline.user.name %> (<%= "@"+timeline.user.screen_name %>)</p>
+			<p><%= timeline.text %> </p>
+		</li>
+	<% end %>
+</ul>

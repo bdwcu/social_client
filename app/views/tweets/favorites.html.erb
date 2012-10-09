@@ -1,0 +1,12 @@
+<% provide(:title, 'Favorites') %>
+
+<ul>
+	<% @favorites[0..9].each do |favorites| %>
+		<li><img src="<%= favorites.user.profile_image_url %>" /> 
+			<p><%= favorites.user.name %> (<%= "@"+favorites.user.screen_name %>)</p>
+			<p><%= favorites.text %> </p>
+		</li>
+	<% end %>
+
+	
+</ul>

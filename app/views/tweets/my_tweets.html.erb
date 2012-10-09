@@ -1,0 +1,11 @@
+<% provide(:title, 'My Tweets') %>
+
+<ul>
+	<% @my_tweets[0..9].each do |my_tweets| %>
+		<li><img src="<%= my_tweets.user.profile_image_url %>" /> 
+			<p><%= my_tweets.user.name %> (<%= "@"+my_tweets.user.screen_name %>)</p>
+			<p><%= my_tweets.text %> </p>
+	<% end %>
+
+	
+</ul>
