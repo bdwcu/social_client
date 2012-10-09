@@ -1,14 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SocialClient</title>
+  <title>Neat Tweet</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
+
+<div class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand pull-left" href="#"><%= yield(:title) %></a>
+      <div class="nav-collapse span6">
+        <ul class="nav pull-right">
+          <li><%= link_to "Home", "./timeline" %></li>
+          <li><%= link_to "My Tweets", "./my_tweets" %></li>
+          <li><%= link_to "Mentions", "./mentions" %></li>
+          <li><%= link_to "Favorites", "./favorites" %></li>
+          <li><%= link_to "New Tweet", "./update" %></li>
+        </ul>
+      </div>
+      <div= id="user_nav">
+        <%= link_to "Sign in with Twitter", "../auth/twitter"%>
+      </div>
+    </div>
+  </div>
+</div>
+
 <body>
 
+<div class="container">
 <%= yield %>
+</div>
 
 </body>
 </html>

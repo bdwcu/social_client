@@ -1,8 +1,8 @@
 # Be sure to restart your server when you modify this file.
 
-SocialClient::Application.config.session_store :cookie_store, :key => '_social_client_session'
+NeatTweet::Application.config.session_store :cookie_store, key: '_NeatTweet_session'
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
 # (create the session table with "rails generate session_migration")
-# SocialClient::Application.config.session_store :active_record_store
+# NeatTweet::Application.config.session_store :active_record_store

@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-SocialClient::Application.load_tasks
+NeatTweet::Application.load_tasks
