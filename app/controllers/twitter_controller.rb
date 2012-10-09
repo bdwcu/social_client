@@ -3,10 +3,29 @@ class TwitterController < ApplicationController
 
 	#home page for twitter client
 	def index
+		if session[:twitterloggedin] != true
+			redirect_to "/auth/twitter"
+		else
+			
+
+		end
+
+
 		
-		Twitter.update("super duper");
 	end
 
+
+
+	#api call to get tweets
+	def getTimeline
+	#get timeline of tweets
+			@tweets = Twitter.user_timeline()
+
+			respond_to do |format|
+				format.json {render :json=>@tweets}
+
+			end
+	end
 	
 
 	def auth_hash
@@ -17,15 +36,15 @@ class TwitterController < ApplicationController
 	# This is the callback from the Omniauth
 	# Note: probably should, but can't make this a protected method?
 	def init
-		# Goal = need to pull out some data from OmniAuth
-		url = URI.parse("https://api.twitter.com/oauth/access_token")
+		
+		
 		auth = request.env["omniauth.auth"]
 		
 		token = request.env["omniauth.auth"]["credentials"].token
 		secret = request.env["omniauth.auth"]["credentials"].secret
 
 	
-
+		#configure twitter client
 		Twitter.configure do |config|
     		config.consumer_key = "6xoFQDY4F2BBZ2ivDmd17Q"
     		config.consumer_secret = "lINK86KMTB4Fzq2B6QqMr4MZs88mTQiFKcEIxj0UNmE"
@@ -33,7 +52,10 @@ class TwitterController < ApplicationController
     		config.oauth_token_secret = secret
   		end
 
-  		
+  		#session stating a user is logged in
+  		session[:twitterloggedin] = true
+
+  		#store token and secret securely somehow? May not be needed
 
 	  	redirect_to :action=>"index"
 

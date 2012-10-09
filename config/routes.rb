@@ -8,6 +8,7 @@ Social::Application.routes.draw do
   match "/auth/twitter/callback" => "twitter#init"
 
   #instagram related paths
+  match "instagram/" => "instagram#index"
   match "instagram/auth" => "instagram#auth"
   match "instagram/check" => "instagram#check"
   match "instagram/verified" => "instagram#verified"
