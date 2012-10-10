@@ -10,7 +10,7 @@ Social::Application.routes.draw do
   #instagram related paths
   match "instagram/" => "instagram#index"
   match "instagram/auth" => "instagram#auth"
-  match "instagram/check" => "instagram#check"
+  match "instagram/check" => "instagram#finishAuth"
   match "instagram/verified" => "instagram#verified"
 
 
