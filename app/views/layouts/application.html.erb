@@ -15,7 +15,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand pull-left" href="#"><%= yield(:title) %></a>
+      <a class="brand pull-left" href="/home"><%= yield(:title) %></a>
       <div class="nav-collapse span6">
         <ul class="nav pull-right">
           <li><%= link_to "Home", "./timeline" %></li>
@@ -26,7 +26,11 @@
         </ul>
       </div>
       <div= id="user_nav">
-        <%= link_to "Sign in with Twitter", "../auth/twitter"%>
+        <% if session[:loggedin] == true %>
+          <%= "signed in as #{Twitter.user.name}"%>
+          <% else %>
+          <%= link_to "Sign in with Twitter", "../auth/twitter"%>
+        <% end %>
       </div>
     </div>
   </div>

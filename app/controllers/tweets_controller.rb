@@ -10,6 +10,14 @@ class TweetsController < ApplicationController
 		  config.oauth_token = token
 		  config.oauth_token_secret = secret
 		end
+
+		session[:loggedin] = loggedin
+
+
+		redirect_to "localhost:3000/tweets/timeline"
+	end
+
+	def index
 	end
 	
 	def timeline 
