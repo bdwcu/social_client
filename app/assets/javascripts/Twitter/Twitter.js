@@ -7,7 +7,7 @@
 
 		},	
 
-		parseTweet:function(){
+		prepTweet:function(){
 			var splitTweet = this.attributes.text.split(" ");
 			
 			var newTweet = [];
@@ -46,11 +46,16 @@
 		tweets:[],
 		initialize:function(callback){
 			//keep a reference to the collection;
-			this.parent = this;
+			var collection = this;
+			
+			callback = callback || null;
+
 			this.fetch({
 				success:function(res){
 					
-					callback(res);
+					if(callback !== null){
+						callback(res);
+					}
 				},
 
 				error:function(e){
@@ -69,16 +74,37 @@
 			}
 		},
 
-		displayTweets:function(anchor){
+		prepTweets:function(anchor){
+			
 			for(var i = 0;i<this.length;i++){
+				this.at(i).prepTweet();
+
+				//console.log(this.at(i));
 				var div = document.createElement("div");
 				div.className = "tweet";
 
 				div.setAttribute("data-tweet",this.at(i).tweet);
-				div.setAttribute("data-type","tweets");
-
+				div.setAttribute("data-type","tweet");
+				//console.log(div);
 				anchor.append(div)
+
+
 			}
+		},
+
+
+		showTweets:function(selector){
+			$(selector).each(function(i,obj){
+				var title = document.createElement("h1");
+				title.innerHTML = "Tweet";
+				title.className = "tweet-title";
+
+				var tweet = document.createElement("p");
+				tweet.innerHTML = $(obj).data("tweet");
+
+				obj.appendChild(title);
+				obj.appendChild(tweet);
+			})
 		}
 
 	

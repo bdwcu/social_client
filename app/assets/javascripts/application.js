@@ -18,9 +18,16 @@
 	in the callback to get triggered after
 	tweets are fetched from the server
 */
+
+
+
 var tweets = new Tweets(function(tweets){
-	tweets.parseTweets();
-	tweets.displayTweets($("#tweets"));
+	tweets.prepTweets($("#tweets"));
+	render();
 });
 
-
+function render(){
+	
+	tweets.showTweets(".tweet");
+	
+}
