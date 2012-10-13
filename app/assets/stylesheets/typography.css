@@ -1,15 +1,10 @@
 body{
-	font-size: 100%;
-	font-family: "futura-pt";
+	font-family: "skolar-web",serif;	
 }
 
-nav ul li a{
-	font-family: "proxima-nova";
+#site-title{
+	font-family: "proxima-nova-alt";
+	font-size: 1.275em;
+	text-transform: uppercase;
+	font-weight: bold;
 }
-h1{
-	font-family: "proxima-nova";
-	font-weight: 800;
-	
-}
-
-

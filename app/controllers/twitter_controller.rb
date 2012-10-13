@@ -1,15 +1,14 @@
 class TwitterController < ApplicationController
 	layout 'twitter'
 
+	before_filter :checkAuth, :except => :init
+	respond_to :html , :json
+
 	#home page for twitter client
 	def index
-		if session[:twitterloggedin] != true
-			redirect_to "/auth/twitter"
-		else
-			
-
-		end
-
+		
+		@tweets = Twitter.user_timeline()
+		respond_with @tweets 
 
 		
 	end
@@ -20,10 +19,8 @@ class TwitterController < ApplicationController
 	def getTimeline
 	#get timeline of tweets
 			@tweets = Twitter.user_timeline()
-
 			respond_to do |format|
 				format.json {render :json=>@tweets}
-
 			end
 	end
 	
@@ -39,7 +36,6 @@ class TwitterController < ApplicationController
 		
 		
 		auth = request.env["omniauth.auth"]
-		
 		token = request.env["omniauth.auth"]["credentials"].token
 		secret = request.env["omniauth.auth"]["credentials"].secret
 
@@ -60,6 +56,11 @@ class TwitterController < ApplicationController
 	  	redirect_to :action=>"index"
 
 
+	end
+
+	protected
+	def checkAuth
+		redirect_to "/auth/twitter" unless session[:twitterloggedin]
 	end
 
 end

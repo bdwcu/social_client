@@ -3,7 +3,7 @@ class InstagramController < ApplicationController
 
 	def index
 		if(session[:instagram_token] == "")
-			redirect_to :action=>auth
+			redirect_to :action=>"auth"
 		end
 	end
 
@@ -14,6 +14,7 @@ class InstagramController < ApplicationController
 		redirect_to Instagram.authorize_url(:redirect_uri => @redirectURL)
 	end
 
+	#this is actually /instagram/check
 	def finishAuth
 		#set up the redirect URI
 		@redirectURL = "http://localhost:3000/instagram/check"
