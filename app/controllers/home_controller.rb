@@ -4,4 +4,9 @@ class HomeController < ApplicationController
 	def index
 	end
 
+	def writetweet
+		Twitter.update(params[:update])
+		render :nothing=>true
+	end
+
 end

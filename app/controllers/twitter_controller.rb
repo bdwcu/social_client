@@ -13,7 +13,7 @@ class TwitterController < ApplicationController
 		
 	end
 
-
+	
 
 	#api call to get tweets
 	def getTimeline

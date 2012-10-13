@@ -31,3 +31,9 @@ function render(){
 	tweets.showTweets(".tweet");
 	
 }
+
+
+$("#writetweet").on("click",function(){
+	console.log("clicked");
+	$("#tweetmodal").reveal();
+})

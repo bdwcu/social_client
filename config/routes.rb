@@ -1,6 +1,6 @@
 Social::Application.routes.draw do
   root :to => "home#index"
-
+  match "/writetweet" => "home#writetweet"
   #twitter related pages
   match "twitter/" => "twitter#index"
 
