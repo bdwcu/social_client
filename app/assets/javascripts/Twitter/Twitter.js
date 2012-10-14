@@ -21,7 +21,7 @@
 
 					
 				}else if((part.search("http") !== -1) || (part.search("www") !== -1)){
-					var replaceText = "<a href=\""+part+"\">"+part+"</a>";
+					var replaceText = "<a href=\""+part+"\" target=\"_blank\">"+part+"</a>";
 					part = part.replace(part,replaceText);
 				}
 			
@@ -95,15 +95,16 @@
 
 		showTweets:function(selector){
 			$(selector).each(function(i,obj){
-				var title = document.createElement("h1");
-				title.innerHTML = "Tweet";
-				title.className = "tweet-title";
+				var tweetImg = document.createElement("img");
+				tweetImg.className = "tweetBird";
+				tweetImg.src = "/assets/bird_black.png"
 
 				var tweet = document.createElement("p");
 				tweet.innerHTML = $(obj).data("tweet");
 
-				obj.appendChild(title);
+			
 				obj.appendChild(tweet);
+					obj.appendChild(tweetImg);
 			})
 		}
 

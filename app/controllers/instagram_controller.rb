@@ -20,14 +20,15 @@ class InstagramController < ApplicationController
 	end
 	def auth
 		#set up the redirect URI
-		@redirectURL = config.instagram_endpoint
+		@redirectURL = Social::Application::INSTAGRAM_ENDPOINT
+
 		redirect_to Instagram.authorize_url(:redirect_uri => @redirectURL)
 	end
 
 	#this is actually /instagram/check
 	def finishAuth
 		#set up the redirect URI
-		@redirectURL = "http://localhost:3000/instagram/check"
+		@redirectURL = Social::Application::INSTAGRAM_ENDPOINT
 		@response = Instagram.get_access_token(params[:code],:redirect_uri=>@redirectURL)
 		
 		session[:instagram_token] = @response.access_token

@@ -2,3 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$shadowColor:#d1d1d1;
+$shadow:0px 0px 8px #d1d1d1;
+
+$padding:20px;
+#tweets{
+	display: -webkit-flex;
+	overflow-x: scroll;
+}
+.tweet{
+	width: 250px;
+	height: 250px;
+	box-shadow: $shadow;
+	padding:$padding;
+	padding-bottom: 20px;
+}
+
+.tweet:after{
+	clear:both;
+}
+
+.tweetBird{
+	width:10%;
+	position: relative;
+	left:180px;
+	top:50px;
+}
