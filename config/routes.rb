@@ -3,6 +3,7 @@ Social::Application.routes.draw do
   match "/writetweet" => "home#writetweet"
   #twitter related pages
   match "twitter/" => "twitter#index"
+  match "twitter/timeline" => "twitter#getTimeline"
 
   #twitter auth urls
   match "/auth/twitter/callback" => "twitter#init"
@@ -11,7 +12,7 @@ Social::Application.routes.draw do
   match "instagram/" => "instagram#index"
   match "instagram/auth" => "instagram#auth"
   match "instagram/check" => "instagram#finishAuth"
-  match "instagram/verified" => "instagram#verified"
+  match "instagram/getFeed" => "instagram#getFeed"
 
 
 

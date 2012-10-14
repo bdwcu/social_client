@@ -7,10 +7,20 @@ class InstagramController < ApplicationController
 		end
 	end
 
+	def getFeed
+		client = Instagram.client(:access_token => session[:instagram_token])
+		user = client.user
 
+		media = client.user_recent_media
+
+		respond_to do |format|
+			format.html
+			format.json {render :json=>media}
+		end
+	end
 	def auth
 		#set up the redirect URI
-		@redirectURL = "http://localhost:3000/instagram/check"
+		@redirectURL = config.instagram_endpoint
 		redirect_to Instagram.authorize_url(:redirect_uri => @redirectURL)
 	end
 

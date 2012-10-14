@@ -42,7 +42,7 @@
 
 	var Tweets = Backbone.Collection.extend({
 		model:Tweet,
-		url:"/twitter",
+		url:"/twitter/timeline.json",
 		tweets:[],
 		initialize:function(callback){
 			//keep a reference to the collection;

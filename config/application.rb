@@ -39,6 +39,7 @@ module Social
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
+    config.instagram_endpoint = "http://localhost:3000/instagram/check"
 
     
     # Use SQL instead of Active Record's schema dumper when creating the database.

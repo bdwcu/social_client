@@ -20,20 +20,43 @@
 */
 
 
-
-var tweets = new Tweets(function(tweets){
-	tweets.prepTweets($("#tweets"));
-	render();
-});
-
-function render(){
-	
-	tweets.showTweets(".tweet");
-	
+if(localStorage.getItem("twitterloggedin") === "true"){
+	console.log("true");
+	loadTweets();
 }
 
 
-$("#writetweet").on("click",function(){
-	console.log("clicked");
-	$("#tweetmodal").reveal();
+
+function loadTweets(){
+	var tweets = new Tweets(function(tweets){
+		tweets.prepTweets($("#tweets"));
+		render();
+	});
+
+	function render(){
+		
+		tweets.showTweets(".tweet");
+		
+	}
+
+
+	$("#writetweet").on("click",function(){
+		$("#tweetmodal").reveal();
+	})
+}
+
+
+/*
+	Deal with login
+*/
+$("#loginbutton").on("click",function(){
+	$("#login").reveal()
 })
+
+function twitterLogin(page){
+	window.location = "/auth/twitter?page=home";
+}
+
+function instagramLogin(page){
+	window.location = "/instagram/auth";
+}

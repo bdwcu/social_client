@@ -17,11 +17,10 @@ class TwitterController < ApplicationController
 
 	#api call to get tweets
 	def getTimeline
-	#get timeline of tweets
-			@tweets = Twitter.user_timeline()
-			respond_to do |format|
-				format.json {render :json=>@tweets}
-			end
+		@tweets = Twitter.user_timeline()
+		respond_to do |format|
+			format.json {render :json=>@tweets}
+		end
 	end
 	
 
