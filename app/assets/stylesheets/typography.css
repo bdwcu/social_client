@@ -1,0 +1,10 @@
+body{
+	font-family: "skolar-web",serif;	
+}
+
+#site-title{
+	font-family: "proxima-nova-alt";
+	font-size: 1.275em;
+	text-transform: uppercase;
+	font-weight: bold;
+}

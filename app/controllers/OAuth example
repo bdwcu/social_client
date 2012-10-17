@@ -1,0 +1,89 @@
+%w{rubygems hmac-sha1 base64 cgi net/https uri openssl}.each{ |f| require f }
+
+KEY     = '';
+SECRET  = '';
+
+# encodes strings that make twitter oauth happy
+def encode( string )
+  URI.escape( string, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]") ).gsub('*', '%2A')
+end
+
+# i'll let you guess what this does
+def generate_nonce(size=7)
+  Base64.encode64(OpenSSL::Random.random_bytes(size)).gsub(/\W/, '')
+end
+
+# used in forming the request signature as well as making the actual request
+method    = 'POST'
+
+# this is the base for the token request only. for all other requests
+# you're on your own for now.
+base_uri  = 'https://api.twitter.com/oauth/request_token'
+
+# params that are needed for the token request
+params    = {
+  'oauth_consumer_key'     => KEY,
+  'oauth_nonce'            => generate_nonce,
+  'oauth_signature_method' => 'HMAC-SHA1',
+  'oauth_timestamp'        => Time.new.to_i.to_s,
+  'oauth_version'          => "1.0"
+}
+
+# format the signature. notice what is encoded and what is not. it fucking matters! trust me.
+request_signature = (method << '&' << encode(base_uri) << '&' << params.sort.collect{ |h| "#{(h.first)}%3D#{(h.last)}" }.join("%26"))
+
+# this is where the actual hashing takes place. be sure to notice that ampersand
+# that is tagged on to the SECRET. it's important too.
+digest            = OpenSSL::Digest::Digest.new( 'sha1' )
+encoded           = encode Base64.encode64( OpenSSL::HMAC.digest(digest, SECRET + '&', request_signature)).chomp.gsub(/\n/, "")
+
+# formatting the OAuth header for the request
+oauth_header      = <<-HEADER
+OAuth realm="",oauth_consumer_key="#{KEY}",oauth_version="1.0",oauth_timestamp="#{params['oauth_timestamp']}",oauth_nonce="#{params['oauth_nonce']}",oauth_signature_method="HMAC-SHA1",oauth_signature="#{encoded}"
+HEADER
+
+# send the request with Net::HTTPs and WIN!
+url           = URI.parse(base_uri)
+http          = Net::HTTP.new(url.host, 443)
+http.use_ssl  = true
+
+resp, data = http.post(url.path, nil, { 'Authorization' => oauth_header })
+
+p resp.body
+
+# send the user to twitter
+params              = CGI::parse(resp.body)
+token, token_secret = params['oauth_token'][0], params['oauth_token_secret'][0]
+puts "Your PIN URL:\nhttp://api.twitter.com/oauth/authorize?oauth_token=" << token
+
+# exchange pin for access token
+print 'Enter your PIN: '
+base_uri = 'https://api.twitter.com/oauth/access_token'
+params   = {
+  'oauth_consumer_key' => KEY,
+  'oauth_nonce' => generate_nonce,
+  'oauth_signature_method' => 'HMAC-SHA1',
+  'oauth_token' => token,
+  'oauth_timestamp' => Time.new.to_i.to_s,
+  'oauth_verifier' => gets.strip
+}
+
+request_signature = (method << '&' << encode(base_uri) << '&' << params.sort.collect{ |h| "#{(h.first)}%3D#{(h.last)}" }.join("%26"))
+digest            = OpenSSL::Digest::Digest.new( 'sha1' )
+
+# our composite signing key now has the token secret after the ampersand
+encoded           = encode Base64.encode64( OpenSSL::HMAC.digest(digest, SECRET + '&' + token_secret, request_signature)).chomp.gsub(/\n/, "")
+
+# our header now has oauth_token and oauth_verifier as key-value pairs
+oauth_header      = <<-HEADER
+OAuth oauth_consumer_key="#{KEY}",oauth_version="1.0",oauth_timestamp="#{params['oauth_timestamp']}",oauth_nonce="#{params['oauth_nonce']}",oauth_signature_method="HMAC-SHA1",oauth_signature="#{encoded}",oauth_token="#{token}",oauth_verifier="#{params['oauth_verifier']}"
+HEADER
+
+url           = URI.parse(base_uri)
+http          = Net::HTTP.new(url.host, 443)
+http.use_ssl  = true
+
+# pretty-print the screen name, as if by MAGIC
+require 'pp'
+resp, data = http.post(url.path, nil, { 'Authorization' => oauth_header })
+pp CGI::parse(resp.body)
