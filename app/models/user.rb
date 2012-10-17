@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   # 2. User will be found in database and tweets get loaded.
   # 
   # Pass in a "Twitter" object for the user
-  def initUser(Twitter)
+  def initUser()
  	
   end
 
